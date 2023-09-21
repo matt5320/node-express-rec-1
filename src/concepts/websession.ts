@@ -3,7 +3,7 @@
 // reset the session's user when the user logs out.
 
 import { SessionData } from "express-session";
-import { UnauthenticatedError } from "./errors";
+import { NotAllowedError, UnauthenticatedError } from "./errors";
 
 export type WebSessionDoc = SessionData;
 
@@ -52,7 +52,7 @@ export default class WebSessionConcept {
 
   isInactive(session: WebSessionDoc) {
     if (session.user !== undefined) {
-      throw new UnauthenticatedError("User already logged in!");
+      throw new NotAllowedError("User already logged in!");
     }
   }
 }
